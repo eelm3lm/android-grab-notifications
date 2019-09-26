@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Grab Notifications</string>
+    <string name="service_name">Notification Listener</string>
+</resources>
