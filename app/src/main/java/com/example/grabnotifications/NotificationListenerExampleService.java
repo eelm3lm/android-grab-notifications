@@ -5,16 +5,13 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
-//import android.util.Log;
+import android.widget.Toast;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.io.OutputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class NotificationListenerExampleService extends NotificationListenerService {
@@ -26,40 +23,31 @@ public class NotificationListenerExampleService extends NotificationListenerServ
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn){
-        //Intent intent = new  Intent("com.example.grabnotifications.notificationlistenerexample");
-        //sendBroadcast(intent);
+
         if (sbn.getPackageName().equals("za.co.fnb.connect.itt")) {
-            //Log.i("noti", sbn.getNotification().extras.getCharSequence(Notification.EXTRA_TEXT).toString());
 
-            URL url = null;
-            try { url = new URL("https://nnuvzm1nn3.execute-api.eu-west-1.amazonaws.com/v1/fnb");
-            } catch (MalformedURLException e) {}
+            Retrofit retrofit2 = new Retrofit.Builder()
+                    .baseUrl("https://nnuvzm1nn3.execute-api.eu-west-1.amazonaws.com/")
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .build();
 
-            HttpURLConnection con = null;
-            try { con = (HttpURLConnection) url.openConnection();
-            } catch (IOException e) {}
+            StringPostAPI stringPostAPI2 = retrofit2.create(StringPostAPI.class);
 
-            try { con.setRequestMethod("POST");
-            } catch (ProtocolException e) {}
+            Call<String> call2 = stringPostAPI2.submit(sbn.getNotification().extras.getCharSequence(Notification.EXTRA_TEXT).toString());
 
-            con.setRequestProperty("Content-Type", "application/json; utf-8");
-            con.setRequestProperty("Accept", "application/json");
-            con.setDoOutput(true);
-            String postBody = sbn.getNotification().extras.getCharSequence(Notification.EXTRA_TEXT).toString();
-
-            try(OutputStream os = con.getOutputStream()) {
-                byte[] input = postBody.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            } catch (IOException e) {}
-
-            try(BufferedReader br = new BufferedReader(
-                    new InputStreamReader(con.getInputStream(), "utf-8"))) {
-                StringBuilder response = new StringBuilder();
-                String responseLine = null;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
+            call2.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
+                    return;
                 }
-            } catch (IOException e) {}
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_LONG).show();
+                    return;
+                }
+            });
         }
 
     }
@@ -67,5 +55,10 @@ public class NotificationListenerExampleService extends NotificationListenerServ
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn){
         // Implement what you want here
+    }
+
+    @Override
+    public void onDestroy(){
+
     }
 }
