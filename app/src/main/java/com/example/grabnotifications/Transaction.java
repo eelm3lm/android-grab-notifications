@@ -10,6 +10,17 @@ public class Transaction {
     private String payee;
     private String status;
 
+    public Transaction (String account, String amount, String body, String card, String category, String date, String payee, String status) {
+        this.account = account;
+        this.amount = amount;
+        this.body = body;
+        this.card = card;
+        this.category = category;
+        this.date = date;
+        this.payee = payee;
+        this.status = status;
+    }
+
     public String getAccount() {
         return account;
     }
