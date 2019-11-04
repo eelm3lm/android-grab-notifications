@@ -9,11 +9,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    //List items = new ArrayList<>();
-
-    public ArrayList<Transaction> transactions2 = new ArrayList<>();
+    public ArrayList<Transaction> transactions = new ArrayList<>();
 
     Handler handler;
     private static final int UPDATE = 100;
@@ -56,19 +51,10 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                List<Transaction> transactions = response.body();
+                List<Transaction> transaction = response.body();
 
-                for (Transaction transaction : transactions) {
-                    String content = "";
-                    content += "Account: " + transaction.getAccount() + "\n";
-                    content += "Amount: " + transaction.getAmount() + "\n";
-                    content += "Date: " + transaction.getDate() + "\n";
-                    content += "Category: " + transaction.getCategory() + "\n\n";
-
-                    //items.add(content);
-
-                    transactions2.add(transaction);
-
+                for (Transaction for_transaction : transaction) {
+                    transactions.add(for_transaction);
                     handler.sendEmptyMessage(UPDATE);
                 }
             }
@@ -79,8 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //final ArrayAdapter<List> adapter = new ArrayAdapter<List>(this, android.R.layout.simple_list_item_1, items);
-        final TransactionAdapter adapter = new TransactionAdapter(this, transactions2);
+        final TransactionAdapter adapter = new TransactionAdapter(this, transactions);
 
         ListView listView = findViewById(R.id.trans_list_view);
         listView.setAdapter(adapter);
@@ -88,9 +73,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(MainActivity.this, items.get(position).toString(), Toast.LENGTH_LONG).show();
-                //TransactionFragment fragment = TransactionFragment.newInstance(items.get(position).toString(), items.get(position).toString());
-                TransactionFragment fragment = TransactionFragment.newInstance(transactions2.get(position).getAmount(), transactions2.get(position).getPayee());
+                TransactionFragment fragment = TransactionFragment.newInstance(transactions.get(position).getDate(), transactions.get(position).getAccount(), transactions.get(position).getAmount(), transactions.get(position).getPayee(), transactions.get(position).getCategory());
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
             }
         });

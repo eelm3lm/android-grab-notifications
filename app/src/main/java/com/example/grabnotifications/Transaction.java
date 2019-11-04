@@ -21,6 +21,12 @@ public class Transaction {
         this.status = status;
     }
 
+    public Transaction (String date, String category, String payee) {
+        this.date = date;
+        this.category = category;
+        this.payee = payee;
+    }
+
     public String getAccount() {
         return account;
     }

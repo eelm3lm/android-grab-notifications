@@ -16,4 +16,8 @@ public interface StringPostAPI {
 
     @GET("v1/fnb")
     Call<List<Transaction>> getTransactions();
+
+    @Headers("Content-Type: application/json")
+    @POST("v1/trans")
+    Call<Transaction> update(@Body Transaction body);
 }

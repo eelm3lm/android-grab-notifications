@@ -3,14 +3,60 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_dark"
-    android:gravity="center">
+    android:gravity="center"
+    android:clickable="true" >
 
     <TextView
-        android:id="@+id/fragment_text"
-        android:layout_width="wrap_content"
+        android:id="@+id/fragment_date"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fragment Text"
+        android:paddingLeft="20dp"
+        android:text="Date"
         android:textColor="@android:color/white"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/fragment_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:text="Account"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/fragment_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Amount"
+        android:textColor="@android:color/white"
+        android:paddingLeft="20dp"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/fragment_payee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Payee"
+        android:textColor="@android:color/white"
+        android:paddingLeft="20dp"
+        android:textSize="20sp"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/fragment_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textColor="@android:color/white"
+        android:paddingLeft="20dp"
+        android:textSize="20sp"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/fragment_button_save"
+        android:layout_width="214dp"
+        android:layout_height="wrap_content"
+        android:text="Save" />
 
 </LinearLayout>

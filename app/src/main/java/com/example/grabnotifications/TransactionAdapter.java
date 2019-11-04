@@ -28,12 +28,24 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_transaction_item, parent, false);
         }
 
-        //Toast.makeText(getContext(), "yay2", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "getView", Toast.LENGTH_SHORT).show();
 
         Transaction currentTransaction = getItem(position);
 
-        TextView text = listItemView.findViewById(R.id.item_text);
-        text.setText(currentTransaction.getAmount());
+        TextView account = listItemView.findViewById(R.id.list_account);
+        account.setText(currentTransaction.getAccount());
+
+        TextView amount = listItemView.findViewById(R.id.list_amount);
+        amount.setText(currentTransaction.getAmount());
+
+        TextView payee = listItemView.findViewById(R.id.list_payee);
+        payee.setText(currentTransaction.getPayee());
+
+        TextView date = listItemView.findViewById(R.id.list_date);
+        date.setText(currentTransaction.getDate());
+
+        TextView category = listItemView.findViewById(R.id.list_category);
+        category.setText(currentTransaction.getCategory());
 
         return listItemView;
     }
