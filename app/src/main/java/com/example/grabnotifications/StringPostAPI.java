@@ -20,4 +20,8 @@ public interface StringPostAPI {
     @Headers("Content-Type: application/json")
     @POST("v1/trans")
     Call<Transaction> update(@Body Transaction body);
+
+    @Headers("Content-Type: application/json")
+    @POST("v1/newtrans")
+    Call<Transaction> create(@Body Transaction body);
 }

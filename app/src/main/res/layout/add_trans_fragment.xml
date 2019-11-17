@@ -6,17 +6,8 @@
     android:gravity="center"
     android:clickable="true" >
 
-    <TextView
-        android:id="@+id/fragment_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:text="Date"
-        android:textColor="@android:color/white"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/fragment_account"
+    <EditText
+        android:id="@+id/add_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
@@ -25,7 +16,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/fragment_amount"
+        android:id="@+id/add_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Amount"
@@ -34,7 +25,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/fragment_payee"
+        android:id="@+id/add_payee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Payee"
@@ -44,7 +35,7 @@
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/fragment_category"
+        android:id="@+id/add_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Category"
@@ -54,7 +45,7 @@
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/fragment_notes"
+        android:id="@+id/add_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Notes"
@@ -64,7 +55,7 @@
         android:inputType="text" />
 
     <Button
-        android:id="@+id/fragment_button_save"
+        android:id="@+id/fragment_add_button_save"
         android:layout_width="214dp"
         android:layout_height="wrap_content"
         android:text="Save" />

@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TransactionFragment fragment = TransactionFragment.newInstance(transactions.get(position).getDate(), transactions.get(position).getAccount(), transactions.get(position).getAmount(), transactions.get(position).getPayee(), transactions.get(position).getCategory());
+                TransactionFragment fragment = TransactionFragment.newInstance(transactions.get(position).getDate(), transactions.get(position).getAccount(), transactions.get(position).getAmount(), transactions.get(position).getPayee(), transactions.get(position).getCategory(), transactions.get(position).getNotes());
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
             }
         });
@@ -89,6 +90,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
         };
+
+        final Button button = findViewById(R.id.add_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddFragment fragment2 = AddFragment.newInstance();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment2).commit();
+            }
+        });
 
     }
 }

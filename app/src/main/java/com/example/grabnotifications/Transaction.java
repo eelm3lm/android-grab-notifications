@@ -9,6 +9,7 @@ public class Transaction {
     private String date;
     private String payee;
     private String status;
+    private String notes;
 
     public Transaction (String account, String amount, String body, String card, String category, String date, String payee, String status) {
         this.account = account;
@@ -21,10 +22,21 @@ public class Transaction {
         this.status = status;
     }
 
-    public Transaction (String date, String category, String payee) {
+    public Transaction (String account, String date, String amount, String payee, String category, String notes) {
+        this.account = account;
         this.date = date;
+        this.amount = amount;
         this.category = category;
         this.payee = payee;
+        this.notes = notes;
+    }
+
+    public Transaction (String account, String amount, String payee, String category, String notes) {
+        this.account = account;
+        this.amount = amount;
+        this.category = category;
+        this.payee = payee;
+        this.notes = notes;
     }
 
     public String getAccount() {
@@ -89,6 +101,14 @@ public class Transaction {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String status) {
+        this.notes = notes;
     }
 
 }
