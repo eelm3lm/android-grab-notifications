@@ -1,6 +1,8 @@
 package com.example.grabnotifications;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -74,8 +76,13 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TransactionFragment fragment = TransactionFragment.newInstance(transactions.get(position).getDate(), transactions.get(position).getAccount(), transactions.get(position).getAmount(), transactions.get(position).getPayee(), transactions.get(position).getCategory(), transactions.get(position).getNotes());
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+                //TransactionFragment fragment = TransactionFragment.newInstance(transactions.get(position).getDate(), transactions.get(position).getAccount(), transactions.get(position).getAmount(), transactions.get(position).getPayee(), transactions.get(position).getCategory(), transactions.get(position).getNotes());
+                //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+                Fragment fragment = TransactionFragment.newInstance(transactions.get(position).getDate(), transactions.get(position).getAccount(), transactions.get(position).getAmount(), transactions.get(position).getPayee(), transactions.get(position).getCategory(), transactions.get(position).getNotes());
+                FragmentTransaction tfragment = getSupportFragmentManager().beginTransaction();
+                tfragment.replace(R.id.container, fragment);
+                tfragment.addToBackStack(null);
+                tfragment.commit();
             }
         });
 
@@ -95,8 +102,13 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddFragment fragment2 = AddFragment.newInstance();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment2).commit();
+                //AddFragment fragment2 = AddFragment.newInstance();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment2).commit();
+                Fragment fragment = AddFragment.newInstance();
+                FragmentTransaction afragment = getSupportFragmentManager().beginTransaction();
+                afragment.replace(R.id.container, fragment);
+                afragment.addToBackStack(null);
+                afragment.commit();
             }
         });
 
