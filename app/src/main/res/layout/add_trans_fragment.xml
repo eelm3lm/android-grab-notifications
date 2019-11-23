@@ -16,10 +16,19 @@
         android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/add_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:text="Date"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <EditText
         android:id="@+id/add_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Amount"
+       android:text="Amount"
         android:textColor="@android:color/white"
         android:paddingLeft="20dp"
         android:textSize="20sp" />

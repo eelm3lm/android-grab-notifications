@@ -36,6 +36,8 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                Transaction transaction;
+
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("https://nnuvzm1nn3.execute-api.eu-west-1.amazonaws.com/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -46,6 +48,10 @@ public class AddFragment extends Fragment {
                 EditText account_text = getView().findViewById(R.id.add_account);
                 Editable account_edit = account_text.getText();
                 String account = account_edit.toString();
+
+                EditText date_text = getView().findViewById(R.id.add_date);
+                Editable date_edit = date_text.getText();
+                String date = date_edit.toString();
 
                 EditText amount_text = getView().findViewById(R.id.add_amount);
                 Editable amount_edit = amount_text.getText();
@@ -63,7 +69,11 @@ public class AddFragment extends Fragment {
                 Editable notes_edit = notes_text.getText();
                 String notes = notes_edit.toString();
 
-                Transaction transaction = new Transaction(account, amount, payee, category, notes);
+                if (date.equals("Date")) {
+                    transaction = new Transaction(account, amount, payee, category, notes);
+                } else {
+                    transaction = new Transaction(account, date, amount, payee, category, notes);
+                }
 
                 Call<Transaction> call = stringPostAPI.create(transaction);
 

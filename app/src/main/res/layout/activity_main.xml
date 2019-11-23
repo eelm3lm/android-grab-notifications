@@ -7,22 +7,28 @@
     android:id="@+id/container"
     tools:context=".MainActivity">
 
-    <ListView
-        android:id="@+id/trans_list_view"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp"></ListView>
+        app:layout_constraintBottom_toBottomOf="parent" >
+
+        <ListView
+            android:id="@+id/trans_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"> </ListView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="150dp"
         android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trans_list_view" />
+        app:layout_constraintTop_toBottomOf="@+id/pullToRefresh" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.grabnotifications;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -109,6 +110,45 @@ public class MainActivity extends AppCompatActivity {
                 afragment.replace(R.id.container, fragment);
                 afragment.addToBackStack(null);
                 afragment.commit();
+            }
+        });
+
+        final SwipeRefreshLayout refreshLayout = findViewById(R.id.pullToRefresh);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://nnuvzm1nn3.execute-api.eu-west-1.amazonaws.com/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                StringPostAPI stringPostAPI = retrofit.create(StringPostAPI.class);
+
+                final Call<List<Transaction>> call = stringPostAPI.getTransactions();
+
+                call.enqueue(new Callback<List<Transaction>>() {
+                    @Override
+                    public void onResponse(Call<List<Transaction>> call, Response<List<Transaction>> response) {
+                        if (!response.isSuccessful()) {
+                            return;
+                        }
+
+                        List<Transaction> transaction = response.body();
+
+                        transactions.clear();
+
+                        for (Transaction for_transaction : transaction) {
+                            transactions.add(for_transaction);
+                            handler.sendEmptyMessage(UPDATE);
+                        }
+                        refreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Transaction>> call, Throwable t) {
+                        return;
+                    }
+                });
             }
         });
 
