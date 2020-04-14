@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final String key = getString(R.string.api_key);
+
         setContentView(R.layout.activity_main);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         StringPostAPI stringPostAPI = retrofit.create(StringPostAPI.class);
 
-        Call<List<Transaction>> call = stringPostAPI.getTransactions();
+        Call<List<Transaction>> call = stringPostAPI.getTransactions(key);
 
         call.enqueue(new Callback<List<Transaction>>() {
             @Override
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
                 StringPostAPI stringPostAPI = retrofit.create(StringPostAPI.class);
 
-                final Call<List<Transaction>> call = stringPostAPI.getTransactions();
+                final Call<List<Transaction>> call = stringPostAPI.getTransactions(key);
 
                 call.enqueue(new Callback<List<Transaction>>() {
                     @Override

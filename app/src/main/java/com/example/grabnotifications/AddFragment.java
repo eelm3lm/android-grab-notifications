@@ -5,17 +5,25 @@ import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
 public class AddFragment extends Fragment {
 
@@ -27,9 +35,12 @@ public class AddFragment extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.add_trans_fragment, container, false);
+        final View v = inflater.inflate(R.layout.add_trans_fragment, container, false);
 
-        Toast.makeText(getContext(), "Add Trans Fragment", Toast.LENGTH_SHORT).show();
+        final Spinner spinner = (Spinner) v.findViewById(R.id.fragment_add_account_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.accounts_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         Button button = v.findViewById(R.id.fragment_add_button_save);
         button.setOnClickListener(new View.OnClickListener() {
@@ -45,9 +56,7 @@ public class AddFragment extends Fragment {
 
                 StringPostAPI stringPostAPI = retrofit.create(StringPostAPI.class);
 
-                EditText account_text = getView().findViewById(R.id.add_account);
-                Editable account_edit = account_text.getText();
-                String account = account_edit.toString();
+                String account = spinner.getSelectedItem().toString();
 
                 EditText date_text = getView().findViewById(R.id.add_date);
                 Editable date_edit = date_text.getText();
@@ -91,6 +100,18 @@ public class AddFragment extends Fragment {
                     }
                 });
 
+            }
+        });
+
+        Button button2 = v.findViewById(R.id.fragment_add_button_now);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText date_text = getView().findViewById(R.id.add_date);
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                String my_format = now.format(formatter);
+                date_text.setText(my_format);
             }
         });
 

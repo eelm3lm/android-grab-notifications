@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Grab Notifications</string>
     <string name="service_name">Notification Listener</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="accounts_array">
+        <item>Cash</item>
+        <item>FNB Cheque</item>
+        <item>FNB Credit</item>
+    </string-array>
 </resources>

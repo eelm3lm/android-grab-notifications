@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_add_ll"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_dark"
+    android:background="@android:color/background_light"
     android:gravity="center"
     android:clickable="true" >
 
-    <EditText
-        android:id="@+id/add_account"
+    <Spinner
+        android:id="@+id/fragment_add_account_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:text="Account"
         android:textColor="@android:color/white"
         android:textSize="20sp" />
 
@@ -21,7 +20,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
         android:text="Date"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="20sp" />
 
     <EditText
@@ -29,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
        android:text="Amount"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:paddingLeft="20dp"
         android:textSize="20sp" />
 
@@ -38,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Payee"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:paddingLeft="20dp"
         android:textSize="20sp"
         android:inputType="text" />
@@ -48,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Category"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:paddingLeft="20dp"
         android:textSize="20sp"
         android:inputType="text" />
@@ -58,10 +57,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Notes"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:paddingLeft="20dp"
         android:textSize="20sp"
         android:inputType="text" />
+
+    <Button
+        android:id="@+id/fragment_add_button_now"
+        android:layout_width="214dp"
+        android:layout_height="wrap_content"
+        android:text="Now" />
 
     <Button
         android:id="@+id/fragment_add_button_save"
